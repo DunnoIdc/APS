@@ -220,6 +220,15 @@ div[data-testid="stVerticalBlockBorderedTest"] {
     box-shadow: 0 4px 18px rgba(15, 23, 42, 0.03) !important;
     margin-bottom: 24px !important;
 }
+/* Force dark text for readability on white card background in both light/dark modes */
+div[data-testid="stVerticalBlockBorderedTest"] p,
+div[data-testid="stVerticalBlockBorderedTest"] label,
+div[data-testid="stVerticalBlockBorderedTest"] span,
+div[data-testid="stVerticalBlockBorderedTest"] div,
+div[data-testid="stVerticalBlockBorderedTest"] h3,
+div[data-testid="stVerticalBlockBorderedTest"] h4 {
+    color: #1e293b !important;
+}
 
 /* Make tabs stretch evenly across the page width */
 div[role="tablist"] {
@@ -227,7 +236,7 @@ div[role="tablist"] {
     width: 100% !important;
     gap: 8px !important;
 }
-button[role="tab"] {
+button[role="tab"], button[data-baseweb="tab"] {
     flex: 1 !important;
     text-align: center !important;
     background-color: #ffffff !important;
@@ -236,19 +245,29 @@ button[role="tab"] {
     padding: 12px 16px !important;
     font-size: 0.95rem !important;
     font-weight: 600 !important;
-    color: #475569 !important;
     transition: all 0.2s ease-in-out !important;
 }
-button[role="tab"]:hover {
-    color: #2563eb !important;
+button[role="tab"] p, button[data-baseweb="tab"] p,
+button[role="tab"] span, button[data-baseweb="tab"] span {
+    color: #475569 !important;
+    font-weight: 600 !important;
+}
+button[role="tab"]:hover, button[data-baseweb="tab"]:hover {
     border-color: #93c5fd !important;
     background-color: #eff6ff !important;
 }
-button[role="tab"][aria-selected="true"] {
+button[role="tab"]:hover p, button[data-baseweb="tab"]:hover p,
+button[role="tab"]:hover span, button[data-baseweb="tab"]:hover span {
+    color: #2563eb !important;
+}
+button[role="tab"][aria-selected="true"], button[data-baseweb="tab"][aria-selected="true"] {
     background: linear-gradient(135deg, #1d4ed8, #2563eb) !important;
-    color: #ffffff !important;
     border-color: #2563eb !important;
     box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15) !important;
+}
+button[role="tab"][aria-selected="true"] p, button[data-baseweb="tab"][aria-selected="true"] p,
+button[role="tab"][aria-selected="true"] span, button[data-baseweb="tab"][aria-selected="true"] span {
+    color: #ffffff !important;
 }
 </style>
 """, unsafe_allow_html=True)
