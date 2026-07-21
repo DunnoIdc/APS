@@ -1,0 +1,41 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environment
+venv/
+.venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# Streamlit
+.streamlit/config.toml
+# Note: Keep other streamlit configs if necessary, but usually config.toml is local.
+# If they have special theme settings in config.toml, they might want to commit it.
+# Let's not ignore the whole .streamlit directory, just common temp files or keep it simple.
+
+# OS files
+.DS_Store
+Thumbs.db
