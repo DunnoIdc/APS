@@ -86,7 +86,7 @@ div[data-testid="stTabs"] {
     border-radius: 999px;
     margin-bottom: 18px;
 }
-.hero h1 {
+.stApp .hero h1, .stApp .hero-inner h1 {
     font-family: 'Sora', sans-serif;
     font-size: 3.0rem;
     font-weight: 800;
@@ -94,30 +94,30 @@ div[data-testid="stTabs"] {
     line-height: 1.15;
     margin-bottom: 14px;
 }
-.hero p {
+.stApp .hero p, .stApp .hero-inner p, .stApp .hero-inner [data-testid="stMarkdownContainer"] p {
     font-size: 1.1rem;
     color: rgba(255,255,255,0.85) !important;
     max-width: 750px;
     line-height: 1.7;
 }
-.hero-tag {
+.stApp .hero-tag, .stApp .hero-inner .hero-tag {
     color: #fca5a5 !important;
 }
-.hero-stats {
+.stApp .hero-stats, .stApp .hero-inner .hero-stats {
     display: flex;
     gap: 35px;
     margin-top: 30px;
     flex-wrap: wrap;
 }
-.hero-stat { color: white !important; }
-.hero-stat .val {
+.stApp .hero-stat { color: white !important; }
+.stApp .hero-stat .val {
     font-family: 'Sora', sans-serif;
     font-size: 1.9rem;
     font-weight: 800;
     line-height: 1;
     color: #ffffff !important;
 }
-.hero-stat .lbl {
+.stApp .hero-stat .lbl {
     font-size: 0.78rem;
     color: rgba(255,255,255,0.65) !important;
     margin-top: 3px;
@@ -200,7 +200,7 @@ div[data-testid="stTabs"] {
     box-shadow: 0 2px 8px rgba(0,0,0,0.01);
 }
 
-.footer {
+.stApp .footer {
     background: linear-gradient(135deg, #0f172a, #1e293b);
     padding: 35px 3rem;
     margin: 40px 0px 0px 0px;
@@ -212,15 +212,15 @@ div[data-testid="stTabs"] {
     gap: 20px;
     color: white !important;
 }
-.footer h4 {
+.stApp .footer h4 {
     font-family: 'Sora', sans-serif;
     font-size: 1.2rem;
     margin: 0 0 6px 0;
     color: #3b82f6 !important;
 }
-.footer p { font-size: 0.82rem; color: rgba(255,255,255,0.55) !important; margin: 0; }
-.footer span { color: rgba(255,255,255,0.55) !important; }
-.footer-badge {
+.stApp .footer p, .stApp .footer [data-testid="stMarkdownContainer"] p { font-size: 0.82rem; color: rgba(255,255,255,0.55) !important; margin: 0; }
+.stApp .footer span { color: rgba(255,255,255,0.55) !important; }
+.stApp .footer-badge {
     background: rgba(59, 130, 246, 0.2);
     border: 1px solid #3b82f6;
     color: #60a5fa !important;
@@ -234,7 +234,7 @@ div[data-testid="stTabs"] {
     margin-bottom: 8px;
     text-align: right;
 }
-.footer-names { font-size: 0.75rem; color: rgba(255,255,255,0.4) !important; text-align: right; }
+.stApp .footer-names { font-size: 0.75rem; color: rgba(255,255,255,0.4) !important; text-align: right; }
 
 section[data-testid="stSidebar"] { background: #0f172a !important; }
 
