@@ -21,7 +21,29 @@ st.markdown("""
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&family=Sora:wght@700;800&display=swap');
 
 *, html, body { margin: 0; padding: 0; box-sizing: border-box; }
-.stApp { background: #f8fafc; font-family: 'Inter', sans-serif; }
+.stApp { background-color: #f8fafc !important; font-family: 'Inter', sans-serif; }
+
+/* Force dark text for general elements inside the app to prevent light text on light backgrounds in Dark Mode */
+.stApp p, 
+.stApp label, 
+.stApp span, 
+.stApp li, 
+.stApp td, 
+.stApp th,
+.stApp [data-testid="stMarkdownContainer"] p,
+.stApp [data-testid="stWidgetLabel"] label,
+.stApp div[role="radiogroup"] label {
+    color: #1e293b !important;
+}
+
+.stApp h1, 
+.stApp h2, 
+.stApp h3, 
+.stApp h4, 
+.stApp h5, 
+.stApp h6 {
+    color: #0f172a !important;
+}
 
 /* Force Streamlit app view to take full screen width and remove padding */
 header[data-testid="stHeader"] {
@@ -68,15 +90,18 @@ div[data-testid="stTabs"] {
     font-family: 'Sora', sans-serif;
     font-size: 3.0rem;
     font-weight: 800;
-    color: #ffffff;
+    color: #ffffff !important;
     line-height: 1.15;
     margin-bottom: 14px;
 }
 .hero p {
     font-size: 1.1rem;
-    color: rgba(255,255,255,0.85);
+    color: rgba(255,255,255,0.85) !important;
     max-width: 750px;
     line-height: 1.7;
+}
+.hero-tag {
+    color: #fca5a5 !important;
 }
 .hero-stats {
     display: flex;
@@ -84,16 +109,17 @@ div[data-testid="stTabs"] {
     margin-top: 30px;
     flex-wrap: wrap;
 }
-.hero-stat { color: white; }
+.hero-stat { color: white !important; }
 .hero-stat .val {
     font-family: 'Sora', sans-serif;
     font-size: 1.9rem;
     font-weight: 800;
     line-height: 1;
+    color: #ffffff !important;
 }
 .hero-stat .lbl {
     font-size: 0.78rem;
-    color: rgba(255,255,255,0.65);
+    color: rgba(255,255,255,0.65) !important;
     margin-top: 3px;
     font-weight: 500;
     text-transform: uppercase;
@@ -184,19 +210,20 @@ div[data-testid="stTabs"] {
     align-items: center;
     flex-wrap: wrap;
     gap: 20px;
-    color: white;
+    color: white !important;
 }
 .footer h4 {
     font-family: 'Sora', sans-serif;
     font-size: 1.2rem;
     margin: 0 0 6px 0;
-    color: #3b82f6;
+    color: #3b82f6 !important;
 }
-.footer p { font-size: 0.82rem; color: rgba(255,255,255,0.55); margin: 0; }
+.footer p { font-size: 0.82rem; color: rgba(255,255,255,0.55) !important; margin: 0; }
+.footer span { color: rgba(255,255,255,0.55) !important; }
 .footer-badge {
     background: rgba(59, 130, 246, 0.2);
     border: 1px solid #3b82f6;
-    color: #60a5fa;
+    color: #60a5fa !important;
     padding: 5px 14px;
     border-radius: 999px;
     font-size: 0.75rem;
@@ -207,7 +234,7 @@ div[data-testid="stTabs"] {
     margin-bottom: 8px;
     text-align: right;
 }
-.footer-names { font-size: 0.75rem; color: rgba(255,255,255,0.4); text-align: right; }
+.footer-names { font-size: 0.75rem; color: rgba(255,255,255,0.4) !important; text-align: right; }
 
 section[data-testid="stSidebar"] { background: #0f172a !important; }
 
