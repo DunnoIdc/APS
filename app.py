@@ -458,6 +458,9 @@ with tab1:
             st.markdown("---")
             st.markdown("**📐 Skala Tinggi Kolom Elevasi:**")
             elev_scale = st.slider("", 0.5, 4.0, 1.8, step=0.1, label_visibility="collapsed")
+            st.markdown("---")
+            st.markdown("**🏁 Transparansi Kolom (Opasitas):**")
+            col_opacity = st.slider("", 0.1, 1.0, 0.6, step=0.1, label_visibility="collapsed")
 
         # Color Legend HTML
         legend_html = ""
@@ -515,6 +518,7 @@ with tab1:
             get_position="[lon, lat]", get_elevation="elevation",
             elevation_scale=elev_scale, radius=150,
             get_fill_color="color", pickable=True, auto_highlight=True,
+            opacity=col_opacity,
         )
         view = pdk.ViewState(
             latitude=df_plot['lat'].mean(), longitude=df_plot['lon'].mean(),
