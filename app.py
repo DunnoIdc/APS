@@ -166,38 +166,22 @@ div[data-testid="stTabs"] {
 .band-val { color: #1e3a8a; font-weight: 700; font-size: 0.95rem; }
 .band-pct { color: #94a3b8; font-size: 0.82rem; width: 50px; text-align: right; }
 
-.insight-box {
-    background: linear-gradient(135deg, #f0f9ff, #f8fafc);
-    border-left: 5px solid #0284c7;
-    border-radius: 8px;
-    padding: 18px 22px;
-    margin-bottom: 18px;
+.premium-report-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-left: 5px solid #3b82f6;
+    border-radius: 14px;
+    padding: 24px;
+    margin-bottom: 20px;
     font-size: 0.92rem;
-    color: #1e293b;
-    line-height: 1.65;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.01);
+    color: #334155 !important;
+    line-height: 1.7;
+    box-shadow: 0 4px 18px rgba(15, 23, 42, 0.02);
 }
-.insight-box-warn {
-    background: linear-gradient(135deg, #fef2f2, #f8fafc);
-    border-left: 5px solid #ef4444;
-    border-radius: 8px;
-    padding: 18px 22px;
-    margin-bottom: 18px;
-    font-size: 0.92rem;
-    color: #1e293b;
-    line-height: 1.65;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.01);
-}
-.insight-box-suggest {
-    background: linear-gradient(135deg, #f0fdf4, #f8fafc);
-    border-left: 5px solid #22c55e;
-    border-radius: 8px;
-    padding: 18px 22px;
-    margin-bottom: 18px;
-    font-size: 0.92rem;
-    color: #1e293b;
-    line-height: 1.65;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.01);
+.premium-report-card p, 
+.premium-report-card strong, 
+.premium-report-card li {
+    color: #334155 !important;
 }
 
 .stApp .footer {
@@ -677,7 +661,7 @@ with tab3:
                 'Color': ['#10b981', '#84cc16', '#eab308', '#f97316', '#ef4444']
             })
             chart_risk = alt.Chart(risk_df).mark_bar(cornerRadiusTopLeft=8, cornerRadiusTopRight=8).encode(
-                x=alt.X('Risk Class:N', sort=['Sangat Aman', 'Aman', 'Cukup Rawan', 'Rawan', 'Sangat Rawan'], title="Kelas Kerawanan"),
+                x=alt.X('Risk Class:N', sort=['Sangat Aman', 'Aman', 'Cukup Rawan', 'Rawan', 'Sangat Rawan'], title="Kelas Kerawanan", axis=alt.Axis(labelAngle=0)),
                 y=alt.Y('Ha:Q', title="Luas Area (Hektar)"),
                 color=alt.Color('Risk Class:N', scale=alt.Scale(
                     domain=['Sangat Aman', 'Aman', 'Cukup Rawan', 'Rawan', 'Sangat Rawan'],
@@ -697,7 +681,7 @@ with tab3:
             
             chart_cross = alt.Chart(cross_melt).mark_bar().encode(
                 x=alt.X('sum(Ha):Q', stack="normalize", title="Proporsi Luas (%)", axis=alt.Axis(format='%')),
-                y=alt.Y('clean_layer:N', sort='-x', title="Tutupan Lahan"),
+                y=alt.Y('clean_layer:N', sort='-x', title="Tutupan Lahan", axis=alt.Axis(labelLimit=200)),
                 color=alt.Color('Risk Class:N', scale=alt.Scale(
                     domain=['Sangat Aman', 'Aman', 'Cukup Rawan', 'Rawan', 'Sangat Rawan'],
                     range=['#10b981', '#84cc16', '#eab308', '#f97316', '#ef4444']
@@ -730,30 +714,39 @@ with tab4:
     st.markdown('<div class="section-title">💡 Temuan Analisis & Rekomendasi Mitigasi</div>', unsafe_allow_html=True)
     st.markdown('<div class="section-sub">Wawasan geospasial kuantitatif serta saran akademis untuk penanggulangan bencana banjir di Kota Sorong</div>', unsafe_allow_html=True)
 
-    st.markdown(f"""
-    <div class="insight-box-warn">
-        🌊 <strong>Faktor Utama Kerawanan (Geomorfologi & Antropogenik)</strong><br>
-        Sebesar <strong>{pct_rawan_sangat_rawan:.1f}% ({area_rawan_sangat_rawan:,.0f} Ha)</strong> dari wilayah Kota Sorong masuk dalam kategori <strong>Rawan</strong> dan <strong>Sangat Rawan</strong> banjir. 
-        Kombinasi elevasi rendah (< 10 meter mdpl) di area pesisir, lereng yang datar (< 1°-2°), dan alih fungsi lahan menjadi <strong>Permukiman</strong> (yang menyumbang koefisien limpasan air permukaan / runoff tertinggi) menjadi penyebab utama genangan banjir berulang di perkotaan Sorong.
-    </div>
-    <div class="insight-box">
-        🚨 <strong>Kritis Wilayah Terbangun (Permukiman)</strong><br>
-        Analisis overlay spasial menunjukkan bahwa <strong>{pct_permukiman_rawan:.1f}% ({area_permukiman_rawan:,.0f} Ha)</strong> kawasan permukiman di Kota Sorong berada langsung di dalam zona berisiko tinggi. Kurangnya koefisien drainase permukaan akibat perkerasan tanah meningkatkan kecepatan akumulasi debit banjir saat intensitas hujan tinggi.
-    </div>
-    <div class="insight-box-suggest">
-        🛠️ <strong>Rekomendasi Mitigasi Struktural (Teknis Basah & Hijau)</strong><br>
-        1. <strong>Pembangunan Kolam Retensi (Retention Ponds):</strong> Di area aliran sungai utama perkotaan untuk menampung puncak debit limpasan sebelum masuk ke saluran mikro kota.<br>
-        2. <strong>Normalisasi & Pengerukan Drainase:</strong> Pembersihan sedimentasi pada saluran pembuangan utama guna meningkatkan kapasitas hidrolik saluran air.<br>
-        3. <strong>Penerapan SuDS (Sustainable Drainage Systems):</strong> Menggunakan paving berpori (permeable pavement), bioretensi (bioswales), dan sumur resapan komunal di area perumahan padat.<br>
-        4. <strong>Restorasi Sabuk Hijau Mangrove:</strong> Melindungi wilayah pesisir Sorong dari potensi banjir pasang air laut (rob) yang memperparah banjir luapan sungai.
-    </div>
-    <div class="insight-box-suggest">
-        📋 <strong>Rekomendasi Non-Struktural (Perencanaan & Kebijakan)</strong><br>
-        1. <strong>Pengendalian RTRW (Rencana Tata Ruang Wilayah):</strong> Pembatasan izin pembangunan baru di zona klasifikasi "Sangat Rawan" banjir.<br>
-        2. <strong>Pembuatan Peta Evakuasi Dini:</strong> Menggunakan peta kerawanan ini sebagai dasar perencanaan jalur evakuasi aman berbasis komunitas di tingkat kelurahan.<br>
-        3. <strong>Reboisasi DAS Hulu:</strong> Penghijauan kembali kawasan perbukitan terjal di hulu tangkapan air Sorong untuk meminimalkan debit limpasan ke dataran rendah.
-    </div>
-    """, unsafe_allow_html=True)
+    col_analysis, col_mitigation = st.columns(2)
+
+    with col_analysis:
+        st.markdown('<div style="font-family:\'Sora\', sans-serif; font-size:1.15rem; font-weight:700; color:#0f172a; margin-bottom:14px; display:flex; align-items:center; gap:8px;">🔍 <span>Temuan Analisis Spasial</span></div>', unsafe_allow_html=True)
+        st.markdown(f"""
+        <div class="premium-report-card" style="border-left-color: #475569;">
+            <span style="font-size:1.3rem; margin-right:4px;">🌊</span> <strong>Faktor Utama Kerawanan (Geomorfologi & Antropogenik)</strong><br><br>
+            Sebesar <strong>{pct_rawan_sangat_rawan:.1f}% ({area_rawan_sangat_rawan:,.0f} Ha)</strong> dari wilayah Kota Sorong masuk dalam kategori <strong>Rawan</strong> dan <strong>Sangat Rawan</strong> banjir. 
+            Kombinasi elevasi rendah (< 10 meter mdpl) di area pesisir, lereng yang datar (< 1°-2°), dan alih fungsi lahan menjadi <strong>Permukiman</strong> (yang menyumbang koefisien limpasan air permukaan / runoff tertinggi) menjadi penyebab utama genangan banjir berulang di perkotaan Sorong.
+        </div>
+        <div class="premium-report-card" style="border-left-color: #475569;">
+            <span style="font-size:1.3rem; margin-right:4px;">🚨</span> <strong>Kritis Wilayah Terbangun (Permukiman)</strong><br><br>
+            Analisis overlay spasial menunjukkan bahwa <strong>{pct_permukiman_rawan:.1f}% ({area_permukiman_rawan:,.0f} Ha)</strong> kawasan permukiman di Kota Sorong berada langsung di dalam zona berisiko tinggi. Kurangnya koefisien drainase permukaan akibat perkerasan tanah meningkatkan kecepatan akumulasi debit banjir saat intensitas hujan tinggi.
+        </div>
+        """, unsafe_allow_html=True)
+
+    with col_mitigation:
+        st.markdown('<div style="font-family:\'Sora\', sans-serif; font-size:1.15rem; font-weight:700; color:#0f172a; margin-bottom:14px; display:flex; align-items:center; gap:8px;">🛠️ <span>Rekomendasi Mitigasi Bencana</span></div>', unsafe_allow_html=True)
+        st.markdown(f"""
+        <div class="premium-report-card" style="border-left-color: #3b82f6;">
+            <span style="font-size:1.3rem; margin-right:4px;">🏗️</span> <strong>Rekomendasi Mitigasi Struktural (Teknis)</strong><br><br>
+            1. <strong>Pembangunan Kolam Retensi (Retention Ponds):</strong> Di area aliran sungai utama perkotaan untuk menampung puncak debit limpasan sebelum masuk ke saluran mikro kota.<br>
+            2. <strong>Normalisasi & Pengerukan Drainase:</strong> Pembersihan sedimentasi pada saluran pembuangan utama guna meningkatkan kapasitas hidrolik saluran air.<br>
+            3. <strong>Penerapan SuDS (Sustainable Drainage Systems):</strong> Menggunakan paving berpori (permeable pavement), bioretensi (bioswales), dan sumur resapan komunal di area perumahan padat.<br>
+            4. <strong>Restorasi Sabuk Hijau Mangrove:</strong> Melindungi wilayah pesisir Sorong dari potensi banjir pasang air laut (rob) yang memperparah banjir luapan sungai.
+        </div>
+        <div class="premium-report-card" style="border-left-color: #3b82f6;">
+            <span style="font-size:1.3rem; margin-right:4px;">📋</span> <strong>Rekomendasi Non-Struktural (Kebijakan)</strong><br><br>
+            1. <strong>Pengendalian RTRW (Rencana Tata Ruang Wilayah):</strong> Pembatasan izin pembangunan baru di zona klasifikasi "Sangat Rawan" banjir.<br>
+            2. <strong>Pembuatan Peta Evakuasi Dini:</strong> Menggunakan peta kerawanan ini sebagai dasar perencanaan jalur evakuasi aman berbasis komunitas di tingkat kelurahan.<br>
+            3. <strong>Reboisasi DAS Hulu:</strong> Penghijauan kembali kawasan perbukitan terjal di hulu tangkapan air Sorong untuk meminimalkan debit limpasan ke dataran rendah.
+        </div>
+        """, unsafe_allow_html=True)
 
 # ── FOOTER ────────────────────────────────────────────────────────────────────
 st.markdown("""
