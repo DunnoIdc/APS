@@ -230,12 +230,14 @@ div[data-testid="stTabs"] {
 .band-pct { color: #94a3b8; font-size: 0.82rem; width: 50px; text-align: right; }
 
 /* ── STREAMLIT OVERRIDES ────────────────────────────────────────────────────── */
-div[data-testid="stVerticalBlockBorderedTest"] {
-    background: #ffffff !important;
+div[data-testid="stVerticalBlockBorderedTest"],
+div[data-testid="stVerticalBlock"] > div:has(div[data-testid="stRadio"]),
+div[data-testid="stVerticalBlock"] > div:has(div[data-testid="stSelectbox"]) {
+    background-color: #ffffff !important;
     border-radius: 18px !important;
-    padding: 24px !important;
-    border: 1px solid #e2e8f0 !important;
-    box-shadow: 0 4px 20px rgba(15, 23, 42, 0.03) !important;
+    padding: 22px 24px !important;
+    border: 1px solid #cbd5e1 !important;
+    box-shadow: 0 4px 20px rgba(15, 23, 42, 0.05) !important;
     margin-bottom: 24px !important;
 }
 
@@ -487,6 +489,7 @@ with tab1:
 
     with col_ctrl:
         with st.container(border=True):
+            st.markdown('<div style="font-size:0.78rem; color:#1e3a8a; font-weight:700; text-transform:uppercase; letter-spacing:1px; margin-bottom:12px;">⚙️ Panel Kontrol Peta</div>', unsafe_allow_html=True)
             st.markdown("**🎨 Warnai Peta Berdasarkan:**")
             color_by = st.radio("", ["Tingkat Kerawanan Banjir", "Ketinggian (Elevasi)", "Kemiringan (Slope)", "Tutupan Lahan"], label_visibility="collapsed")
             st.markdown("---")
@@ -561,6 +564,7 @@ with tab1:
         deck = pdk.Deck(
             layers=[layer], initial_view_state=view,
             map_style=pdk.map_styles.CARTO_DARK,
+            height=600,
             views=[pdk.View(
                 type="MapView",
                 controller={
@@ -575,7 +579,7 @@ with tab1:
                 "style": {"background": "#0f172a", "color": "white", "borderRadius": "8px"}
             }
         )
-        st.pydeck_chart(deck, use_container_width=True)
+        st.pydeck_chart(deck, use_container_width=True, height=600)
 
 # ══════════════════════════════════════════════════════════════════════════════
 # TAB 2 — PETA PARAMETER GEOGRAFIS (2D)
@@ -659,7 +663,7 @@ with tab2:
                     control=False
                 ).add_to(m)
 
-            st_folium(m, use_container_width=True, height=450, returned_objects=[])
+            st_folium(m, use_container_width=True, height=600, returned_objects=[])
 
     with col_lc_stat:
         lc_counts = df['clean_layer'].value_counts().reset_index()
