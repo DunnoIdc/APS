@@ -304,31 +304,31 @@ button[role="tab"][aria-selected="true"] span, button[data-baseweb="tab"][aria-s
 def load_data():
     df = pd.read_csv("data_spasial.csv.gz", compression="gzip")
     
-    # Scoring Elevation (Lower is higher risk)
+    # Scoring Elevation (Lower is higher risk) - Based on Floodplain Morphometry & Tidal Limit
     def score_elevation(elev):
-        if elev <= 15: return 5
-        elif elev <= 40: return 4
-        elif elev <= 80: return 3
-        elif elev <= 150: return 2
-        else: return 1
+        if elev <= 2: return 5      # Sangat Rawan (Pasang surut/rob pantai)
+        elif elev <= 5: return 4    # Rawan (Dataran banjir sungai aktif)
+        elif elev <= 10: return 3   # Cukup Rawan (Dataran rendah transisi)
+        elif elev <= 15: return 2   # Aman (Kaki perbukitan aman)
+        else: return 1              # Sangat Aman (Perbukitan tinggi)
         
-    # Scoring Slope (Flatter is higher risk)
+    # Scoring Slope (Flatter is higher risk) - Based on Van Zuidam (1985) Relief Classification
     def score_slope(slope):
-        if slope <= 2: return 5
-        elif slope <= 5: return 4
-        elif slope <= 15: return 3
-        elif slope <= 30: return 2
-        else: return 1
+        if slope <= 1: return 5     # Datar
+        elif slope <= 2: return 4   # Sangat Landai
+        elif slope <= 5: return 3   # Landai
+        elif slope <= 10: return 2  # Agak Curam
+        else: return 1              # Curam
         
-    # Scoring Land Cover (Runoff potential, built-up/agriculture is high, forest is low)
+    # Scoring Land Cover - Based on SNI 2415:2016 Runoff Coefficients (C)
     lc_scores = {
-        'PERMUKIMAN': 5,
-        'LADANG': 4,
-        'TANAMAN CAMPUR': 4,
-        'PENUTUP LAHAN': 3,
-        'HERBA DAN RUMPUT': 3,
-        'SEMAK BELUKAR': 2,
-        'HUTAN LAHAN RENDAH': 1,
+        'PERMUKIMAN': 5,            # Kedap air (C = 0.70 - 0.95)
+        'LADANG': 4,                # Pertanian lahan kering (C = 0.50 - 0.60)
+        'TANAMAN CAMPUR': 4,        # Kebun campuran (C = 0.50 - 0.60)
+        'PENUTUP LAHAN': 3,         # Lahan terbuka vegetasi rendah (C = 0.20 - 0.40)
+        'HERBA DAN RUMPUT': 3,      # Padang rumput (C = 0.20 - 0.40)
+        'SEMAK BELUKAR': 2,         # Vegetasi sedang (C = 0.15 - 0.30)
+        'HUTAN LAHAN RENDAH': 1,    # Vegetasi rapat/infiltrasi tinggi (C = 0.05 - 0.20)
         'HUTAN LAHAN TINGGI': 1,
         'HUTAN MANGROVE': 1
     }
@@ -337,15 +337,15 @@ def load_data():
     df['score_sl'] = df['slope'].apply(score_slope)
     df['score_lc'] = df['clean_layer'].map(lc_scores).fillna(3)
     
-    # Weighted overlay (Elevation 45%, Slope 35%, Land Cover 20%)
-    df['fvi'] = 0.45 * df['score_el'] + 0.35 * df['score_sl'] + 0.20 * df['score_lc']
+    # Weighted overlay (Elevation 60%, Slope 30%, Land Cover 10% - AHP Method)
+    df['fvi'] = 0.60 * df['score_el'] + 0.30 * df['score_sl'] + 0.10 * df['score_lc']
     
-    # Classify vulnerability classes
+    # Classify vulnerability classes - Strict Geometrical Breaks
     def classify_fvi(v):
-        if v <= 1.8: return "Sangat Aman"
-        elif v <= 2.6: return "Aman"
-        elif v <= 3.4: return "Cukup Rawan"
-        elif v <= 4.2: return "Rawan"
+        if v <= 2.5: return "Sangat Aman"
+        elif v <= 3.2: return "Aman"
+        elif v <= 4.0: return "Cukup Rawan"
+        elif v <= 4.6: return "Rawan"
         else: return "Sangat Rawan"
         
     df['flood_class'] = df['fvi'].apply(classify_fvi)
@@ -707,7 +707,7 @@ with tab3:
     with col_c1:
         with st.container(border=True):
             st.markdown("🏔️ **Karakteristik Elevasi**")
-            st.write(f"Rerata ketinggian wilayah Kota Sorong adalah **{df['elevation'].mean():.1f} mdpl**. Zona rawan banjir terakumulasi secara dominan pada dataran rendah di bawah ketinggian **15 mdpl**.")
+            st.write(f"Rerata ketinggian wilayah Kota Sorong adalah **{df['elevation'].mean():.1f} mdpl**. Zona rawan banjir terakumulasi secara dominan pada dataran rendah di bawah ketinggian **10 mdpl**.")
 
     with col_c2:
         with st.container(border=True):
@@ -730,7 +730,7 @@ with tab4:
     <div class="insight-box-warn">
         🌊 <strong>Faktor Utama Kerawanan (Geomorfologi & Antropogenik)</strong><br>
         Sebesar <strong>{pct_rawan_sangat_rawan:.1f}% ({area_rawan_sangat_rawan:,.0f} Ha)</strong> dari wilayah Kota Sorong masuk dalam kategori <strong>Rawan</strong> dan <strong>Sangat Rawan</strong> banjir. 
-        Kombinasi elevasi rendah (< 15 meter mdpl) di area pesisir, lereng yang sangat datar (< 2°), dan pesatnya alih fungsi lahan menjadi <strong>Permukiman</strong> (yang menyumbang koefisien limpasan air permukaan / runoff tertinggi) menjadi penyebab utama genangan banjir berulang di perkotaan Sorong.
+        Kombinasi elevasi rendah (< 10 meter mdpl) di area pesisir, lereng yang datar (< 1°-2°), dan alih fungsi lahan menjadi <strong>Permukiman</strong> (yang menyumbang koefisien limpasan air permukaan / runoff tertinggi) menjadi penyebab utama genangan banjir berulang di perkotaan Sorong.
     </div>
     <div class="insight-box">
         🚨 <strong>Kritis Wilayah Terbangun (Permukiman)</strong><br>
