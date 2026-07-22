@@ -522,7 +522,7 @@ with tab1:
         )
         deck = pdk.Deck(
             layers=[layer], initial_view_state=view,
-            map_style="mapbox://styles/mapbox/light-v9",
+            map_style=pdk.map_styles.CARTO_DARK,
             views=[pdk.View(
                 type="MapView",
                 controller={
