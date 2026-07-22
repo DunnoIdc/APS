@@ -241,6 +241,21 @@ div[data-testid="stVerticalBlock"] > div:has(div[data-testid="stSelectbox"]) {
     margin-bottom: 24px !important;
 }
 
+/* Force Pydeck map container and canvas height to match right sidebar card height */
+div[data-testid="stDeckGlJsonChart"],
+div[data-testid="stDeckGlJsonChart"] > div,
+div[data-testid="stElementContainer"]:has(div[data-testid="stDeckGlJsonChart"]),
+iframe[title="pydeck_chart"] {
+    height: 730px !important;
+    min-height: 730px !important;
+    border-radius: 18px !important;
+    overflow: hidden !important;
+}
+
+div[data-testid="stDeckGlJsonChart"] canvas {
+    height: 730px !important;
+}
+
 /* Tabs Styling */
 div[role="tablist"] {
     display: flex !important;
@@ -564,7 +579,7 @@ with tab1:
         deck = pdk.Deck(
             layers=[layer], initial_view_state=view,
             map_style=pdk.map_styles.CARTO_DARK,
-            height=600,
+            height=730,
             views=[pdk.View(
                 type="MapView",
                 controller={
@@ -579,7 +594,7 @@ with tab1:
                 "style": {"background": "#0f172a", "color": "white", "borderRadius": "8px"}
             }
         )
-        st.pydeck_chart(deck, use_container_width=True, height=600)
+        st.pydeck_chart(deck, use_container_width=True, height=730)
 
 # ══════════════════════════════════════════════════════════════════════════════
 # TAB 2 — PETA PARAMETER GEOGRAFIS (2D)
@@ -663,7 +678,7 @@ with tab2:
                     control=False
                 ).add_to(m)
 
-            st_folium(m, use_container_width=True, height=600, returned_objects=[])
+            st_folium(m, use_container_width=True, height=730, returned_objects=[])
 
     with col_lc_stat:
         lc_counts = df['clean_layer'].value_counts().reset_index()
