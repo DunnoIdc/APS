@@ -390,28 +390,28 @@ lc_palette = {
 
 # ── HERO ──────────────────────────────────────────────────────────────────────
 st.markdown(f"""
-<div class="hero">
-  <div class="hero-inner">
-    <div class="hero-tag">⚠️ GIS Risk Assessment Platform</div>
-    <h1>Pemetaan Zona Rawan Banjir Kota Sorong<br>Berbasis Data DEM dan Tutupan Lahan</h1>
-    <p>Aplikasi Geospasial interaktif untuk memetakan dan menganalisis tingkat kerawanan banjir di wilayah Kota Sorong, Papua Barat Daya.
+<div class="hero" style="background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #0369a1 100%); padding: 60px 3rem; margin: 0px 0px 40px 0px; position: relative; overflow: hidden; border-radius: 0px;">
+  <div class="hero-inner" style="position: relative; z-index: 1; max-width: 1000px;">
+    <div class="hero-tag" style="display: inline-block; background: rgba(239, 68, 68, 0.2); border: 1px solid rgba(239, 68, 68, 0.4); color: #fca5a5 !important; font-size: 0.78rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; padding: 5px 14px; border-radius: 999px; margin-bottom: 18px;">⚠️ GIS Risk Assessment Platform</div>
+    <h1 style="font-family: 'Sora', sans-serif; font-size: 3.0rem; font-weight: 800; color: #ffffff !important; line-height: 1.15; margin-bottom: 14px; margin-top: 0px; border: none; padding: 0px;">Pemetaan Zona Rawan Banjir Kota Sorong<br>Berbasis Data DEM dan Tutupan Lahan</h1>
+    <p style="font-size: 1.1rem; color: rgba(255,255,255,0.85) !important; max-width: 750px; line-height: 1.7; margin-bottom: 24px; border: none; padding: 0px;">Aplikasi Geospasial interaktif untuk memetakan dan menganalisis tingkat kerawanan banjir di wilayah Kota Sorong, Papua Barat Daya.
        Penentuan tingkat kerawanan dihitung melalui metode pembobotan (Weighted Overlay) berdasarkan parameter Elevasi (DEM SRTM), Kemiringan Lereng (Slope), dan Koefisien Limpasan Tutupan Lahan (BIG).</p>
-    <div class="hero-stats">
-      <div class="hero-stat">
-        <div class="val">{area_total:,.0f} Ha</div>
-        <div class="lbl">Hektar Terpetakan</div>
+    <div class="hero-stats" style="display: flex; gap: 35px; margin-top: 30px; flex-wrap: wrap;">
+      <div class="hero-stat" style="color: white !important;">
+        <div class="val" style="font-family: 'Sora', sans-serif; font-size: 1.9rem; font-weight: 800; line-height: 1; color: #ffffff !important;">{area_total:,.0f} Ha</div>
+        <div class="lbl" style="font-size: 0.78rem; color: rgba(255,255,255,0.65) !important; margin-top: 3px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px;">Hektar Terpetakan</div>
       </div>
-      <div class="hero-stat">
-        <div class="val">{pct_rawan_sangat_rawan:.1f}%</div>
-        <div class="lbl">Zona Rawan &amp; Sangat Rawan</div>
+      <div class="hero-stat" style="color: white !important;">
+        <div class="val" style="font-family: 'Sora', sans-serif; font-size: 1.9rem; font-weight: 800; line-height: 1; color: #ffffff !important;">{pct_rawan_sangat_rawan:.1f}%</div>
+        <div class="lbl" style="font-size: 0.78rem; color: rgba(255,255,255,0.65) !important; margin-top: 3px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px;">Zona Rawan &amp; Sangat Rawan</div>
       </div>
-      <div class="hero-stat">
-        <div class="val">{area_rawan_sangat_rawan:,.0f} Ha</div>
-        <div class="lbl">Luas Zona Berisiko</div>
+      <div class="hero-stat" style="color: white !important;">
+        <div class="val" style="font-family: 'Sora', sans-serif; font-size: 1.9rem; font-weight: 800; line-height: 1; color: #ffffff !important;">{area_rawan_sangat_rawan:,.0f} Ha</div>
+        <div class="lbl" style="font-size: 0.78rem; color: rgba(255,255,255,0.65) !important; margin-top: 3px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px;">Luas Zona Berisiko</div>
       </div>
-      <div class="hero-stat">
-        <div class="val">{pct_permukiman_rawan:.1f}%</div>
-        <div class="lbl">Permukiman Terdampak</div>
+      <div class="hero-stat" style="color: white !important;">
+        <div class="val" style="font-family: 'Sora', sans-serif; font-size: 1.9rem; font-weight: 800; line-height: 1; color: #ffffff !important;">{pct_permukiman_rawan:.1f}%</div>
+        <div class="lbl" style="font-size: 0.78rem; color: rgba(255,255,255,0.65) !important; margin-top: 3px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px;">Permukiman Terdampak</div>
       </div>
     </div>
   </div>
@@ -750,14 +750,14 @@ with tab4:
 
 # ── FOOTER ────────────────────────────────────────────────────────────────────
 st.markdown("""
-<div class="footer">
+<div class="footer" style="background: linear-gradient(135deg, #0f172a, #1e293b); padding: 35px 3rem; margin: 40px 0px 0px 0px; border-top: 3px solid #3b82f6; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; color: white !important;">
     <div>
-        <h4>Sistem Pemetaan Kerawanan Banjir Kota Sorong</h4>
-        <p>Aplikasi Pendukung Keputusan Mitigasi Bencana Banjir Berbasis GIS &amp; Multi-Criteria Evaluation (MCE)<br>Sumber Data: DEM SRTM (USGS) &amp; Peta Rencana Tata Ruang/Tutupan Lahan BIG</p>
+        <h4 style="font-family: 'Sora', sans-serif; font-size: 1.2rem; margin: 0 0 6px 0; color: #3b82f6 !important; border: none; padding: 0;">Sistem Pemetaan Kerawanan Banjir Kota Sorong</h4>
+        <p style="font-size: 0.82rem; color: rgba(255,255,255,0.55) !important; margin: 0; line-height: 1.5;">Aplikasi Pendukung Keputusan Mitigasi Bencana Banjir Berbasis GIS &amp; Multi-Criteria Evaluation (MCE)<br>Sumber Data: DEM SRTM (USGS) &amp; Peta Rencana Tata Ruang/Tutupan Lahan BIG</p>
     </div>
-    <div>
-        <span class="footer-badge">Aplikasi GIS Interaktif</span>
-        <div class="footer-names">Kelompok 10 · Kolaborasi QGIS &amp; Streamlit Python</div>
+    <div style="text-align: right;">
+        <span class="footer-badge" style="background: rgba(59, 130, 246, 0.2); border: 1px solid #3b82f6; color: #60a5fa !important; padding: 5px 14px; border-radius: 999px; font-size: 0.75rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; display: inline-block; margin-bottom: 8px;">Aplikasi GIS Interaktif</span>
+        <div class="footer-names" style="font-size: 0.75rem; color: rgba(255,255,255,0.4) !important;">Kelompok 10 · Kolaborasi QGIS &amp; Streamlit Python</div>
     </div>
 </div>
 """, unsafe_allow_html=True)
