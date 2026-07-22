@@ -441,32 +441,30 @@ lc_palette = {
 }
 
 # ── HERO BANNER ───────────────────────────────────────────────────────────────
-st.markdown(f"""
-<div class="hero-container">
-  <div class="hero-inner">
-    <div class="hero-badge">⚠️ GIS RISK ASSESSMENT PLATFORM</div>
-    <div class="hero-title">Pemetaan Zona Rawan Banjir Kota Sorong<br>Berbasis Data DEM dan Tutupan Lahan</div>
-    <div class="hero-subtitle">Aplikasi Geospasial interaktif untuk memetakan dan menganalisis tingkat kerawanan banjir di wilayah Kota Sorong, Papua Barat Daya. Penentuan tingkat kerawanan dihitung melalui metode pembobotan (Weighted Overlay) berdasarkan parameter Elevasi (DEM SRTM), Kemiringan Lereng (Slope), dan Koefisien Limpasan Tutupan Lahan (BIG).</div>
-    
-    <div class="hero-stats-grid">
-      <div class="hero-stat-card">
-        <div class="hero-stat-val">{area_total:,.0f} Ha</div>
-        <div class="hero-stat-lbl">Hektar Terpetakan</div>
-      </div>
-      <div class="hero-stat-card">
-        <div class="hero-stat-val">{pct_rawan_sangat_rawan:.1f}%</div>
-        <div class="hero-stat-lbl">Zona Rawan &amp; Sangat Rawan</div>
-      </div>
-      <div class="hero-stat-card">
-        <div class="hero-stat-val">{area_rawan_sangat_rawan:,.0f} Ha</div>
-        <div class="hero-stat-lbl">Luas Zona Berisiko</div>
-      </div>
-      <div class="hero-stat-card">
-        <div class="hero-stat-val">{pct_permukiman_rawan:.1f}%</div>
-        <div class="hero-stat-lbl">Permukiman Terdampak</div>
-      </div>
-    </div>
-  </div>
+st.markdown(f"""<div class="hero-container">
+<div class="hero-inner">
+<div class="hero-badge">⚠️ GIS RISK ASSESSMENT PLATFORM</div>
+<div class="hero-title">Pemetaan Zona Rawan Banjir Kota Sorong<br>Berbasis Data DEM dan Tutupan Lahan</div>
+<div class="hero-subtitle">Aplikasi Geospasial interaktif untuk memetakan dan menganalisis tingkat kerawanan banjir di wilayah Kota Sorong, Papua Barat Daya. Penentuan tingkat kerawanan dihitung melalui metode pembobotan (Weighted Overlay) berdasarkan parameter Elevasi (DEM SRTM), Kemiringan Lereng (Slope), dan Koefisien Limpasan Tutupan Lahan (BIG).</div>
+<div class="hero-stats-grid">
+<div class="hero-stat-card">
+<div class="hero-stat-val">{area_total:,.0f} Ha</div>
+<div class="hero-stat-lbl">Hektar Terpetakan</div>
+</div>
+<div class="hero-stat-card">
+<div class="hero-stat-val">{pct_rawan_sangat_rawan:.1f}%</div>
+<div class="hero-stat-lbl">Zona Rawan &amp; Sangat Rawan</div>
+</div>
+<div class="hero-stat-card">
+<div class="hero-stat-val">{area_rawan_sangat_rawan:,.0f} Ha</div>
+<div class="hero-stat-lbl">Luas Zona Berisiko</div>
+</div>
+<div class="hero-stat-card">
+<div class="hero-stat-val">{pct_permukiman_rawan:.1f}%</div>
+<div class="hero-stat-lbl">Permukiman Terdampak</div>
+</div>
+</div>
+</div>
 </div>
 """, unsafe_allow_html=True)
 
@@ -761,46 +759,43 @@ with tab4:
 
     with col_analysis:
         st.markdown('<div style="font-family:\'Plus Jakarta Sans\', sans-serif; font-size:1.15rem; font-weight:700; color:#0f172a; margin-bottom:14px; display:flex; align-items:center; gap:8px;">🔍 <span>Temuan Analisis Spasial</span></div>', unsafe_allow_html=True)
-        st.markdown(f"""
-        <div class="premium-report-card" style="border-left-color: #475569;">
-            <span style="font-size:1.3rem; margin-right:4px;">🌊</span> <strong>Faktor Utama Kerawanan (Geomorfologi & Antropogenik)</strong><br><br>
-            Sebesar <strong>{pct_rawan_sangat_rawan:.1f}% ({area_rawan_sangat_rawan:,.0f} Ha)</strong> dari wilayah Kota Sorong masuk dalam kategori <strong>Rawan</strong> dan <strong>Sangat Rawan</strong> banjir. 
-            Kombinasi elevasi rendah (< 10 meter mdpl) di area pesisir, lereng yang datar (< 1°-2°), dan alih fungsi lahan menjadi <strong>Permukiman</strong> (yang menyumbang koefisien limpasan air permukaan / runoff tertinggi) menjadi penyebab utama genangan banjir berulang di perkotaan Sorong.
-        </div>
-        <div class="premium-report-card" style="border-left-color: #475569;">
-            <span style="font-size:1.3rem; margin-right:4px;">🚨</span> <strong>Kritis Wilayah Terbangun (Permukiman)</strong><br><br>
-            Analisis overlay spasial menunjukkan bahwa <strong>{pct_permukiman_rawan:.1f}% ({area_permukiman_rawan:,.0f} Ha)</strong> kawasan permukiman di Kota Sorong berada langsung di dalam zona berisiko tinggi. Kurangnya koefisien drainase permukaan akibat perkerasan tanah meningkatkan kecepatan akumulasi debit banjir saat intensitas hujan tinggi.
-        </div>
-        """, unsafe_allow_html=True)
+        st.markdown(f"""<div class="premium-report-card" style="border-left-color: #475569;">
+<span style="font-size:1.3rem; margin-right:4px;">🌊</span> <strong>Faktor Utama Kerawanan (Geomorfologi & Antropogenik)</strong><br><br>
+Sebesar <strong>{pct_rawan_sangat_rawan:.1f}% ({area_rawan_sangat_rawan:,.0f} Ha)</strong> dari wilayah Kota Sorong masuk dalam kategori <strong>Rawan</strong> dan <strong>Sangat Rawan</strong> banjir. 
+Kombinasi elevasi rendah (< 10 meter mdpl) di area pesisir, lereng yang datar (< 1°-2°), dan alih fungsi lahan menjadi <strong>Permukiman</strong> (yang menyumbang koefisien limpasan air permukaan / runoff tertinggi) menjadi penyebab utama genangan banjir berulang di perkotaan Sorong.
+</div>
+<div class="premium-report-card" style="border-left-color: #475569;">
+<span style="font-size:1.3rem; margin-right:4px;">🚨</span> <strong>Kritis Wilayah Terbangun (Permukiman)</strong><br><br>
+Analisis overlay spasial menunjukkan bahwa <strong>{pct_permukiman_rawan:.1f}% ({area_permukiman_rawan:,.0f} Ha)</strong> kawasan permukiman di Kota Sorong berada langsung di dalam zona berisiko tinggi. Kurangnya koefisien drainase permukaan akibat perkerasan tanah meningkatkan kecepatan akumulasi debit banjir saat intensitas hujan tinggi.
+</div>
+""", unsafe_allow_html=True)
 
     with col_mitigation:
         st.markdown('<div style="font-family:\'Plus Jakarta Sans\', sans-serif; font-size:1.15rem; font-weight:700; color:#0f172a; margin-bottom:14px; display:flex; align-items:center; gap:8px;">🛠️ <span>Rekomendasi Mitigasi Bencana</span></div>', unsafe_allow_html=True)
-        st.markdown(f"""
-        <div class="premium-report-card" style="border-left-color: #3b82f6;">
-            <span style="font-size:1.3rem; margin-right:4px;">🏗️</span> <strong>Rekomendasi Mitigasi Struktural (Teknis)</strong><br><br>
-            1. <strong>Pembangunan Kolam Retensi (Retention Ponds):</strong> Di area aliran sungai utama perkotaan untuk menampung puncak debit limpasan sebelum masuk ke saluran mikro kota.<br>
-            2. <strong>Normalisasi & Pengerukan Drainase:</strong> Pembersihan sedimentasi pada saluran pembuangan utama guna meningkatkan kapasitas hidrolik saluran air.<br>
-            3. <strong>Penerapan SuDS (Sustainable Drainage Systems):</strong> Menggunakan paving berpori (permeable pavement), bioretensi (bioswales), dan sumur resapan komunal di area perumahan padat.<br>
-            4. <strong>Restorasi Sabuk Hijau Mangrove:</strong> Melindungi wilayah pesisir Sorong dari potensi banjir pasang air laut (rob) yang memperparah banjir luapan sungai.
-        </div>
-        <div class="premium-report-card" style="border-left-color: #3b82f6;">
-            <span style="font-size:1.3rem; margin-right:4px;">📋</span> <strong>Rekomendasi Non-Struktural (Kebijakan)</strong><br><br>
-            1. <strong>Pengendalian RTRW (Rencana Tata Ruang Wilayah):</strong> Pembatasan izin pembangunan baru di zona klasifikasi "Sangat Rawan" banjir.<br>
-            2. <strong>Pembuatan Peta Evakuasi Dini:</strong> Menggunakan peta kerawanan ini sebagai dasar perencanaan jalur evakuasi aman berbasis komunitas di tingkat kelurahan.<br>
-            3. <strong>Reboisasi DAS Hulu:</strong> Penghijauan kembali kawasan perbukitan terjal di hulu tangkapan air Sorong untuk meminimalkan debit limpasan ke dataran rendah.
-        </div>
-        """, unsafe_allow_html=True)
+        st.markdown(f"""<div class="premium-report-card" style="border-left-color: #3b82f6;">
+<span style="font-size:1.3rem; margin-right:4px;">🏗️</span> <strong>Rekomendasi Mitigasi Struktural (Teknis)</strong><br><br>
+1. <strong>Pembangunan Kolam Retensi (Retention Ponds):</strong> Di area aliran sungai utama perkotaan untuk menampung puncak debit limpasan sebelum masuk ke saluran mikro kota.<br>
+2. <strong>Normalisasi & Pengerukan Drainase:</strong> Pembersihan sedimentasi pada saluran pembuangan utama guna meningkatkan kapasitas hidrolik saluran air.<br>
+3. <strong>Penerapan SuDS (Sustainable Drainage Systems):</strong> Menggunakan paving berpori (permeable pavement), bioretensi (bioswales), dan sumur resapan komunal di area perumahan padat.<br>
+4. <strong>Restorasi Sabuk Hijau Mangrove:</strong> Melindungi wilayah pesisir Sorong dari potensi banjir pasang air laut (rob) yang memperparah banjir luapan sungai.
+</div>
+<div class="premium-report-card" style="border-left-color: #3b82f6;">
+<span style="font-size:1.3rem; margin-right:4px;">📋</span> <strong>Rekomendasi Non-Struktural (Kebijakan)</strong><br><br>
+1. <strong>Pengendalian RTRW (Rencana Tata Ruang Wilayah):</strong> Pembatasan izin pembangunan baru di zona klasifikasi "Sangat Rawan" banjir.<br>
+2. <strong>Pembuatan Peta Evakuasi Dini:</strong> Menggunakan peta kerawanan ini sebagai dasar perencanaan jalur evakuasi aman berbasis komunitas di tingkat kelurahan.<br>
+3. <strong>Reboisasi DAS Hulu:</strong> Penghijauan kembali kawasan perbukitan terjal di hulu tangkapan air Sorong untuk meminimalkan debit limpasan ke dataran rendah.
+</div>
+""", unsafe_allow_html=True)
 
 # ── FOOTER BANNER ─────────────────────────────────────────────────────────────
-st.markdown("""
-<div class="footer-container">
-    <div>
-        <div class="footer-title">Sistem Pemetaan Kerawanan Banjir Kota Sorong</div>
-        <div class="footer-text">Aplikasi Pendukung Keputusan Mitigasi Bencana Banjir Berbasis GIS &amp; Multi-Criteria Evaluation (MCE)<br>Sumber Data: DEM SRTM (USGS) &amp; Peta Rencana Tata Ruang/Tutupan Lahan BIG</div>
-    </div>
-    <div style="text-align: right;">
-        <span class="footer-badge">Aplikasi GIS Interaktif</span>
-        <div class="footer-names">Kelompok 10 · Kolaborasi QGIS &amp; Streamlit Python</div>
-    </div>
+st.markdown("""<div class="footer-container">
+<div>
+<div class="footer-title">Sistem Pemetaan Kerawanan Banjir Kota Sorong</div>
+<div class="footer-text">Aplikasi Pendukung Keputusan Mitigasi Bencana Banjir Berbasis GIS &amp; Multi-Criteria Evaluation (MCE)<br>Sumber Data: DEM SRTM (USGS) &amp; Peta Rencana Tata Ruang/Tutupan Lahan BIG</div>
+</div>
+<div style="text-align: right;">
+<span class="footer-badge">Aplikasi GIS Interaktif</span>
+<div class="footer-names">Kelompok 10 · Kolaborasi QGIS &amp; Streamlit Python</div>
+</div>
 </div>
 """, unsafe_allow_html=True)
