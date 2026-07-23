@@ -465,6 +465,10 @@ st.markdown(f"""<div class="hero-container">
 <div class="hero-subtitle">Aplikasi Geospasial interaktif untuk memetakan dan menganalisis tingkat kerawanan banjir di wilayah Kota Sorong, Papua Barat Daya. Penentuan tingkat kerawanan dihitung melalui metode pembobotan (Weighted Overlay) berdasarkan parameter Elevasi (DEM SRTM), Kemiringan Lereng (Slope), dan Koefisien Limpasan Tutupan Lahan (BIG).</div>
 <div class="hero-stats-grid">
 <div class="hero-stat-card">
+<div class="hero-stat-val">{total:,} Pxl</div>
+<div class="hero-stat-lbl">Total Pixel Grid 3D</div>
+</div>
+<div class="hero-stat-card">
 <div class="hero-stat-val">{area_total:,.0f} Ha</div>
 <div class="hero-stat-lbl">Hektar Terpetakan</div>
 </div>
@@ -517,14 +521,14 @@ with tab1:
         # Color Legend HTML
         legend_html = ""
         if color_by == "Tingkat Kerawanan Banjir":
-            legend_html = """
+            legend_html = f"""
             <div class="card" style="border-color: #fca5a5;">
                 <div style="font-size:0.78rem; color:#ef4444; font-weight:700; text-transform:uppercase; letter-spacing:1px; margin-bottom:12px;">⚠️ Kelas Kerawanan Banjir</div>
-                <div class="band-row"><div class="band-dot" style="background:#ef4444;"></div><div class="band-name">Sangat Rawan</div><div class="band-val">""" + f"{fvi_counts.get('Sangat Rawan', 0)*px_ha:,.0f} Ha" + """</div></div>
-                <div class="band-row"><div class="band-dot" style="background:#f97316;"></div><div class="band-name">Rawan</div><div class="band-val">""" + f"{fvi_counts.get('Rawan', 0)*px_ha:,.0f} Ha" + """</div></div>
-                <div class="band-row"><div class="band-dot" style="background:#eab308;"></div><div class="band-name">Cukup Rawan</div><div class="band-val">""" + f"{fvi_counts.get('Cukup Rawan', 0)*px_ha:,.0f} Ha" + """</div></div>
-                <div class="band-row"><div class="band-dot" style="background:#84cc16;"></div><div class="band-name">Aman</div><div class="band-val">""" + f"{fvi_counts.get('Aman', 0)*px_ha:,.0f} Ha" + """</div></div>
-                <div class="band-row"><div class="band-dot" style="background:#10b981;"></div><div class="band-name">Sangat Aman</div><div class="band-val">""" + f"{fvi_counts.get('Sangat Aman', 0)*px_ha:,.0f} Ha" + """</div></div>
+                <div class="band-row"><div class="band-dot" style="background:#ef4444;"></div><div class="band-name">Sangat Rawan</div><div class="band-val" style="text-align:right;"><b>{fvi_counts.get('Sangat Rawan', 0)*px_ha:,.0f} Ha</b><br><span style="font-size:0.75rem; font-weight:500; color:#64748b;">{fvi_counts.get('Sangat Rawan', 0):,} Pixel</span></div></div>
+                <div class="band-row"><div class="band-dot" style="background:#f97316;"></div><div class="band-name">Rawan</div><div class="band-val" style="text-align:right;"><b>{fvi_counts.get('Rawan', 0)*px_ha:,.0f} Ha</b><br><span style="font-size:0.75rem; font-weight:500; color:#64748b;">{fvi_counts.get('Rawan', 0):,} Pixel</span></div></div>
+                <div class="band-row"><div class="band-dot" style="background:#eab308;"></div><div class="band-name">Cukup Rawan</div><div class="band-val" style="text-align:right;"><b>{fvi_counts.get('Cukup Rawan', 0)*px_ha:,.0f} Ha</b><br><span style="font-size:0.75rem; font-weight:500; color:#64748b;">{fvi_counts.get('Cukup Rawan', 0):,} Pixel</span></div></div>
+                <div class="band-row"><div class="band-dot" style="background:#84cc16;"></div><div class="band-name">Aman</div><div class="band-val" style="text-align:right;"><b>{fvi_counts.get('Aman', 0)*px_ha:,.0f} Ha</b><br><span style="font-size:0.75rem; font-weight:500; color:#64748b;">{fvi_counts.get('Aman', 0):,} Pixel</span></div></div>
+                <div class="band-row"><div class="band-dot" style="background:#10b981;"></div><div class="band-name">Sangat Aman</div><div class="band-val" style="text-align:right;"><b>{fvi_counts.get('Sangat Aman', 0)*px_ha:,.0f} Ha</b><br><span style="font-size:0.75rem; font-weight:500; color:#64748b;">{fvi_counts.get('Sangat Aman', 0):,} Pixel</span></div></div>
             </div>
             """
         elif color_by == "Tutupan Lahan":
@@ -533,7 +537,7 @@ with tab1:
             for lc_name, color in lc_palette.items():
                 count = len(df[df['clean_layer'] == lc_name])
                 if count > 0:
-                    legend_html += f'<div class="band-row"><div class="band-dot" style="background:{color};"></div><div class="band-name" style="font-size:0.8rem;">{lc_name.title()}</div><div class="band-val" style="font-size:0.8rem;">{count*px_ha:,.0f} Ha</div></div>'
+                    legend_html += f'<div class="band-row"><div class="band-dot" style="background:{color};"></div><div class="band-name" style="font-size:0.8rem;">{lc_name.title()}</div><div class="band-val" style="font-size:0.8rem; text-align:right;"><b>{count*px_ha:,.0f} Ha</b><br><span style="font-size:0.72rem; font-weight:500; color:#64748b;">{count:,} Pixel</span></div></div>'
             legend_html += '</div>'
         else:
             legend_html = f"""
